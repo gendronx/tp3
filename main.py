@@ -1,8 +1,14 @@
 # ­ 
+"""
+Xavier Gendron
+404
+Ce programme est un jeu dans lequel nous avancons dans un couloir rempli de monstre
+"""
+
+
 import random as r
 
 pv = 20
-
 niveau = 0
 victoire = 0
 defaite = 0
@@ -60,12 +66,17 @@ def combatre():
     if dee > puissance_monstre:
         vie += puissance_monstre
         victoire += 1
+        menu()
 
     elif dee < puissance_monstre:
         vie -= puissance_monstre
         defaite += 1
+        status()
+        menu()
 
     elif dee == puissance_monstre:
         vie -= puissance_monstre
         defaite += 1
+        status()
+        menu()
 
