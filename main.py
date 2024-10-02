@@ -75,7 +75,7 @@ def menu():
 
 def combatre():
     global niveau, pv, victoire, defaite, puissance_monstre, dee, victoire_consecutive
-    puissance_monstre = randint(1, 1)
+    puissance_monstre = randint(1, 5)
     dee = randint(1, 6)
     niveau += 1
     print(f"Vous tombez face à face avec un adversaire de difficulté : {puissance_monstre}")
