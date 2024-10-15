@@ -17,12 +17,10 @@ dee = 0
 
 def parti():
     print(f"Vous êtes dans un couloir infini, des portes tout du long derriere lesqulles se cachent des monstres que vouz allez devoir affronter")
-    print(f"Vouz ouvrez la premiere porte")
-
+    print(f"Vouz ouvrez la premiere porte\n")
 
 parti()
 while pv > 0:
-
     def status():
         print(f"Adversaire: {niveau}")
         print(f"Force de l'adversaire: {puissance_monstre}")
@@ -30,17 +28,22 @@ while pv > 0:
         print(f"Niveau de vie de l'usager: {pv}")
         print(f"Combat {niveau}: Victoire: {victoire} Défaite: {defaite}")
 
-
-    def combatre():
-        global niveau, pv, victoire, defaite, puissance_monstre, dee, victoire_consecutive
+    if victoire_consecutive >= 3:
+        puissance_monstre = randint(4, 5)
+        dee = randint(1, 6)
+        print(f"Vos exploits on attiré l'attention d'un boss de difficulté : {puissance_monstre}")
+    else:
         puissance_monstre = randint(1, 5)
         dee = randint(1, 6)
-        niveau += 1
-        print(f"Vous tombez face à face avec un adversaire de difficulté : {puissance_monstre}")
-        menu()
+        print(f"Force de l'adversaire suivant: {puissance_monstre}")
+    print(f"Que voulez-vous faire: ")
+    print(f"1- Combatre cet adversaire")
+    print(f"2- Contourner cet adversaire et aller ouvrir une autre porte")
+    print(f"3- Afficher les règles du jeu")
+    print(f"4- Quitter la partie")
+    action = int(input(": "))
 
-    def combat():
-        global niveau, pv, victoire, defaite, puissance_monstre, dee, victoire_consecutive
+    if action == 1:
         if dee > puissance_monstre:
             pv += puissance_monstre
             victoire += 1
@@ -48,7 +51,6 @@ while pv > 0:
             victoire_consecutive += 1
             print(f"Nombre de victoire consécutives: {victoire_consecutive}")
             status()
-            combatre()
 
         elif dee < puissance_monstre:
             pv -= puissance_monstre
@@ -57,11 +59,11 @@ while pv > 0:
             victoire_consecutive = 0
             print(f"Nombre de victoire consécutives: {victoire_consecutive}")
             status()
+
             if pv < 1:
                 print("Vos points de vie on atteint 0 "
                       "vous êtes mort")
                 exit()
-            menu()
 
         elif dee == puissance_monstre:
             pv -= puissance_monstre
@@ -74,51 +76,37 @@ while pv > 0:
                 print("Vos points de vie on atteint 0 "
                       "vous êtes mort")
                 exit()
-            menu()
 
         if pv < 1:
             print("Vos points de vie on atteint 0 "
                   "vous êtes mort")
             exit()
 
-    def menu():
-        global pv, niveau, puissance_monstre
-        print(f"Force de l'adversaire suivant: {puissance_monstre}")
-        print(f"Que voulez-vous faire: ")
-        print(f"1- Combatre cet adversaire")
-        print(f"2- Contourner cet adversaire et aller ouvrir une autre porte")
-        print(f"3- Afficher les règles du jeu")
-        print(f"4- Quitter la partie")
-        action = int(input(": "))
+    elif action == 2:
+        if victoire_consecutive >= 3:
+            print("Le boss ne vous laissera pas fuir si facilement")
 
-        if action == 1:
-            combat()
-            status()
-
-        elif action == 2:
+        else:
             print(f"Vous avez fui le combat, vous perdez 1 point de vie et ouvrez une autre porte")
             niveau += 1
             pv -= 1
+            victoire_consecutive = 0
             print(f"Il vous reste {pv} point de vie")
-            if pv < 1:
-                print("Vos points de vie on atteint 0 "
-                      "vous êtes mort")
-                exit()
-            combatre()
-
-        elif action == 3:
-            print(
-                f"Pour réussir un combat, il faut que la valeur du dé lancé soit supérieure à la force de l’adversaire.\n"
-                "Dans ce cas, le niveau de vie de l’usager est augmenté de la force de l’adversaire.\n"
-                "Une défaite a lieu lorsque la valeur du dé lancé par l’usager est inférieure ou égale à la force de l’adversaire.\n"
-                "Dans ce cas, le niveau de vie de l’usager est diminué de la force de l’adversaire.\n"
-                "La partie se termine lorsque les points de vie de l’usager tombent sous 0.\n"
-                "L’usager peut combattre ou éviter chaque adversaire, dans le cas de l’évitement, il y a une pénalité de 1 point de vie.\n\n")
-            menu()
-
-        elif action == 4:
-            print(f"Merci et au revoir...")
+        if pv < 1:
+            print("Vos points de vie on atteint 0 "
+                  "vous êtes mort")
             exit()
 
+    elif action == 3:
+        print(
+            f"Pour réussir un combat, il faut que la valeur du dé lancé soit supérieure à la force de l’adversaire.\n"
+            "Dans ce cas, le niveau de vie de l’usager est augmenté de la force de l’adversaire.\n"
+            "Une défaite a lieu lorsque la valeur du dé lancé par l’usager est inférieure ou égale à la force de l’adversaire.\n"
+            "Dans ce cas, le niveau de vie de l’usager est diminué de la force de l’adversaire.\n"
+            "La partie se termine lorsque les points de vie de l’usager tombent sous 0.\n"
+            "L’usager peut combattre ou éviter chaque adversaire, dans le cas de l’évitement, il y a une pénalité de 1 point de vie.\n\n")
 
-    combatre()
+    elif action == 4:
+        print(f"Merci et au revoir...")
+        exit()
+
