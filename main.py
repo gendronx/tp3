@@ -19,6 +19,7 @@ def parti():
     print(f"Vous êtes dans un couloir infini, des portes tout du long derriere lesqulles se cachent des monstres que vouz allez devoir affronter")
     print(f"Vouz ouvrez la premiere porte\n")
 
+
 parti()
 while pv > 0:
     def status():
@@ -29,12 +30,16 @@ while pv > 0:
         print(f"Combat {niveau}: Victoire: {victoire} Défaite: {defaite}")
 
     if victoire_consecutive >= 3:
-        puissance_monstre = randint(4, 5)
-        dee = randint(1, 6)
+        puissance_monstre = randint(10, 11)
+        dee1 = randint(1, 6)
+        dee2 = randint(1, 6)
+        dee = dee1 + dee2
         print(f"Vos exploits on attiré l'attention d'un boss de difficulté : {puissance_monstre}")
     else:
-        puissance_monstre = randint(1, 5)
-        dee = randint(1, 6)
+        puissance_monstre = randint(1, 10)
+        dee1 = randint(1, 6)
+        dee2 = randint(1, 6)
+        dee = dee1 + dee2
         print(f"Force de l'adversaire suivant: {puissance_monstre}")
     print(f"Que voulez-vous faire: ")
     print(f"1- Combatre cet adversaire")
@@ -109,4 +114,3 @@ while pv > 0:
     elif action == 4:
         print(f"Merci et au revoir...")
         exit()
-
